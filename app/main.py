@@ -14,8 +14,10 @@ def repl():
         
         if command == "exit":
             return
-        
-        print(f"{command}: command not found")
+        elif command.startswith("echo "):
+            print(command[5:])
+        else:
+            print(f"{command}: command not found")
 
 
 if __name__ == "__main__":

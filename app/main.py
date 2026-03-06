@@ -1,3 +1,4 @@
+import os
 import sys
 
 BUILT_INS = {"exit", "type", "echo"}
@@ -26,10 +27,19 @@ def repl():
 
 
 def type_func(args):
+    system_path = os.environ['PATH']
+    
     if args[0] in BUILT_INS:
         print(f"{args[0]} is a shell builtin")
-    else:
-        print(f"{args[0]}: not found")
+        return
+
+    for dir in system_path.split(os.pathsep):
+        exec_path = os.path.join(dir, args[0])
+        if (os.access(exec_path, os.X_OK)):
+            print(f"{args[0]} is {exec_path}")
+            return
+
+    print(f"{args[0]}: not found")
 
 
 if __name__ == "__main__":

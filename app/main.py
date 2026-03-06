@@ -2,12 +2,16 @@ import sys
 
 
 def main():
-    sys.stdout.write("$ ")
-    command = input()
-    
-    sys.stdout.write(command + ": command not found")
-    
-    pass
+    repl()
+
+
+def repl():
+    while True:
+        sys.stdout.write("$ ")
+        
+        # Wait for user input
+        command = input()
+        print(f"{command}: command not found")
 
 
 if __name__ == "__main__":

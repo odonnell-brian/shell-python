@@ -6,9 +6,14 @@ BUILT_INS = {
     "exit": lambda args: exit_func(),
     "type": lambda args: type_func(args),
     "echo": lambda args: echo_func(args),
+    "pwd": lambda args: pwd_func(),
 }
 
+current_directory = ""
+
 def main():
+    global current_directory
+    current_directory = os.getcwd()
     repl()
 
 
@@ -36,6 +41,10 @@ def exit_func():
 
 def echo_func(args):
     print(" ".join(args))
+    
+    
+def pwd_func():
+    print(current_directory)
     
 
 def type_func(args):    

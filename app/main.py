@@ -3,7 +3,7 @@ import sys
 
 def main():
     sys.stdout.write("$ ")
-    command = input("")
+    command = input()
     
     sys.stdout.write(command + ": command not found")
     

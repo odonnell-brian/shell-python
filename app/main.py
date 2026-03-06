@@ -7,13 +7,10 @@ BUILT_INS = {
     "type": lambda args: type_func(args),
     "echo": lambda args: echo_func(args),
     "pwd": lambda args: pwd_func(),
+    "cd": lambda args: cd_func(args),
 }
 
-current_directory = ""
-
 def main():
-    global current_directory
-    current_directory = os.getcwd()
     repl()
 
 
@@ -44,7 +41,7 @@ def echo_func(args):
     
     
 def pwd_func():
-    print(current_directory)
+    print(os.getcwd())
     
 
 def type_func(args):    
@@ -57,6 +54,13 @@ def type_func(args):
         print(f"{args[0]} is {exec_path}")
     else:
         print(f"{args[0]}: not found")
+        
+
+def cd_func(args):
+    try:
+        os.chdir(args[0])
+    except:
+        print(f"cd: {args[0]}: No such file or directory")
 
 
 def try_exec(command, args):

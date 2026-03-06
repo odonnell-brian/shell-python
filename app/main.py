@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import subprocess
 import sys
 
@@ -9,6 +10,8 @@ BUILT_INS = {
     "pwd": lambda args: pwd_func(),
     "cd": lambda args: cd_func(args),
 }
+
+HOME_SPECIFIER = "~"
 
 def main():
     repl()
@@ -57,10 +60,15 @@ def type_func(args):
         
 
 def cd_func(args):
+    path = args[0]
     try:
-        os.chdir(args[0])
+        if path.startswith(HOME_SPECIFIER):
+            user_home = Path.home()
+            path = path.replace(HOME_SPECIFIER, str(user_home))
+        
+        os.chdir(path)
     except:
-        print(f"cd: {args[0]}: No such file or directory")
+        print(f"cd: {path}: No such file or directory")
 
 
 def try_exec(command, args):

@@ -11,6 +11,10 @@ def repl():
         
         # Wait for user input
         command = input()
+        
+        if command == "exit":
+            return
+        
         print(f"{command}: command not found")
 
 
